@@ -1,0 +1,12 @@
+﻿
+
+<app-sample-field-create [(vm)]="vm"></app-sample-field-create>
+
+<div class="row" [formGroup]="vm.form">
+  <section class="col-md-12">
+    <div class='form-group'>
+      <label>Types</label>
+      <multiselect-funnel [dataitem]="'SampleType'" [ctrlName]="'collectionSampleType'" [vm]="vm" [ctrlNameItem]="'typeId'" [fieldFilterName]="'name'"></multiselect-funnel>
+    </div>
+  </section>
+</div>

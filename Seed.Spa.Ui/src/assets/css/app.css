@@ -1,0 +1,158 @@
+.form-group > .ng-invalid {
+  border: 1px solid #e2775a !important;
+}
+
+.gc-card button {
+  margin: 5px;
+}
+
+.gc-header img {
+  width: 70px
+}
+
+.modal-body {
+  min-height: 100px;
+  max-height: 500px;
+  overflow-y: scroll
+}
+
+.gc-table-search th,
+.gc-table-search td {
+  padding: .25em;
+  background-color: #dddddd;
+}
+
+.gc-table-controls {
+  min-width: 130px;
+}
+
+.gc-table-controls--items-2 {
+  min-width: 30px;
+}
+
+.gc-table-controls--items-3 {
+  min-width: calc(80px + 1rem);
+}
+
+.gc-table-controls--items-4 {
+  min-width: calc(150px + 1rem);
+}
+
+.gc-table-controls .btn {
+  font-size: 1.4em;
+  padding: 0.25rem .5rem;
+}
+
+.table-sort {
+  position: relative;
+  display: block;
+  padding-right: 1em;
+}
+
+.table-sort__icon {
+  position: absolute;
+  top: .25em;
+  right: 0;
+  cursor: pointer;
+}
+
+.gc-menu__list__text {
+  font-size: 12px;
+}
+
+dl {
+  width: 100% !important;
+}
+
+.btn-primary > .fa-reply {
+  padding: 5px !important;
+}
+
+.card-block {
+  padding: 20px;
+}
+
+.navbar-nav {
+  flex-direction: row;
+}
+
+.ml-auto > li {
+  margin-right: 5px;
+}
+
+.list-group {
+  margin-bottom: 5px;
+}
+
+.col-lg-12 {
+  padding-right: 0;
+  padding-left: 0
+}
+
+.col-lg-4 {
+  padding-left: 0
+}
+
+.badge {
+  color: #000;
+  background-color: #dfdfdf;
+}
+
+.gc-body {
+  min-height: calc(100vh - 80px - 50px);
+}
+
+.chart-area {
+  margin: 10px
+}
+
+.gc-profile__avatar {
+  margin-left: 30px;
+  padding: 10px;
+}
+
+.gc-table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.section-scroll {
+  min-height: 100px;
+  max-height: 50px;
+  overflow-y: scroll;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: .25rem;
+  padding: 10px;
+}
+
+.modal-lg {
+  max-width: 1000px
+}
+
+.simple-notification-wrapper {
+  z-index: 999999 !important;
+}
+
+.upload-component-paste-area {
+  width: 100%;
+  height: 200px;
+  background: #dfdfdf;
+  border: dashed;
+  border-width: 5px;
+  text-align: center;
+}
+
+.modal-backdrop {
+  opacity: 0 !important;
+}
+
+.gc-modal.modal.fade.in.show {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+
+.ng2-tag-input__text-input {
+  background-color: transparent !important;
+}

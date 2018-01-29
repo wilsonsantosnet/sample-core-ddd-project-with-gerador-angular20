@@ -1,0 +1,58 @@
+<div class="row" [formGroup]="vm.form">
+  <section class="col-md-12">
+    <div class='form-group'>
+      <label>{{ vm.infos.name.label }}</label>
+      <input type='text' class='form-control' [(ngModel)]='vm.model.name' name='name' required formControlName='name'  />
+    </div>
+  </section>
+  <section class="col-md-12">
+    <div class='form-group'>
+      <label>{{ vm.infos.descricao.label }}</label>
+      <textarea class='form-control'  [(ngModel)]='vm.model.descricao' name='descricao'  rows='10' formControlName='descricao' ></textarea>
+    </div>
+  </section>
+  <section class="col-md-12">
+    <div class='form-group'>
+      <label>{{ vm.infos.tags.label }}</label>
+      <tag-custom [ngModel] ="vm.model.tags" (tagChange)="vm.model.tags=$event" formControlName='tags' ></tag-custom>
+    </div>
+  </section>
+  <section class="col-md-12">
+    <div class='form-group'>
+      <label>{{ vm.infos.datetime.label }}</label>
+      <input type='text' class='form-control' [(ngModel)]='vm.model.datetime' name='datetime'  formControlName='datetime' datetimepicker />
+    </div>
+  </section>
+  <section class="col-md-12">
+    <div class='form-group'>
+      <label>{{ vm.infos.sampleId.label }}</label>
+      <input type='text' class='form-control' [(ngModel)]='vm.model.sampleId' name='sampleId' required formControlName='sampleId' maski='9999999999' />
+    </div>
+  </section>
+  <section class="col-md-12">
+    <div class='form-group'>
+      <label>{{ vm.infos.sampleTypeId.label }}</label>
+      <select class='form-control'  name='sampleTypeId' [(ngModel)]='vm.model.sampleTypeId' required formControlName='sampleTypeId' datasource [dataitem]="'SampleType'" [fieldFilterName]="'Name'"></select>
+      </div>
+  </section>
+  <section class="col-md-12">
+    <div class='form-group'>
+      <label>{{ vm.infos.age.label }}</label>
+      <input type='text' class='form-control' [(ngModel)]='vm.model.age' name='age'  formControlName='age' maski='9999999999' />
+    </div>
+  </section>
+  <section class="col-md-12">
+    <div class='form-group'>
+      <label>{{ vm.infos.category.label }}</label>
+      <input type='text' class='form-control' [(ngModel)]='vm.model.category' name='category'  formControlName='category' maski='9999999999' />
+    </div>
+  </section>
+  <section class="col-md-12">
+    <div class='checkbox'>
+      <label>
+          <input type='checkbox'  [(ngModel)]='vm.model.ativo'  name='ativo' formControlName='ativo' /> {{ vm.infos.ativo.label }}?
+      </label>
+    </div>
+  </section>
+</div>
+

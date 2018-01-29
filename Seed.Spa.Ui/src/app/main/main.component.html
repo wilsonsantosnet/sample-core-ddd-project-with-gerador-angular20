@@ -1,0 +1,11 @@
+﻿<div [ngClass]="{'gc-container--closed': !menuIsOpen}" class="gc-container gc--menu-fixed" data-mockup="size-container">
+  <app-menu-aside [(vm)]='vm' (onToggleMenu)="onToggleMenu($event)" (onLogout)="onLogout($event)" (onFilter)="onFilter($event)" [folderAvatar]="'Usuario'"></app-menu-aside>
+  <div class="gc-content-aside">
+    <div class="gc-body">
+      <div class="container-app">
+        <router-outlet></router-outlet>
+       </div>
+    </div>
+    <app-footer></app-footer>
+  </div>
+</div>

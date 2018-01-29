@@ -1,0 +1,38 @@
+<dl>
+    <dt>{{ vm.infos.name.label }}:</dt>
+    <dd><bind-custom [model]="vm.details.name" [format]="'string'" [tag]="'span'" ></bind-custom></dd>
+ 
+
+    <dt>{{ vm.infos.descricao.label }}:</dt>
+    <dd><bind-custom [model]="vm.details.descricao" [format]="'string'" [tag]="'span'" ></bind-custom></dd>
+ 
+
+    <dt>{{ vm.infos.tags.label }}:</dt>
+    <dd><bind-custom [model]="vm.details.tags" [format]="'tag'" [tag]="'span'" ></bind-custom></dd>
+ 
+
+    <dt>{{ vm.infos.datetime.label }}:</dt>
+    <dd><bind-custom [model]="vm.details.datetime" [format]="'DateTime?'" [tag]="'span'" ></bind-custom></dd>
+ 
+
+    <dt>{{ vm.infos.sampleId.label }}:</dt>
+    <dd><bind-custom [model]="vm.details.sampleId" [format]="'int'" [tag]="'span'" ></bind-custom></dd>
+ 
+
+    <dt>{{ vm.infos.sampleTypeId.label }}:</dt>
+    <dd><bind-custom [model]="vm.details.sampleTypeId" [format]="'instance'" [tag]="'span'"  [instance]="'SampleType'"  [key]="'SampleTypeId'"></bind-custom></dd>
+ 
+
+    <dt>{{ vm.infos.age.label }}:</dt>
+    <dd><bind-custom [model]="vm.details.age" [format]="'int?'" [tag]="'span'" ></bind-custom></dd>
+ 
+
+    <dt>{{ vm.infos.category.label }}:</dt>
+    <dd><bind-custom [model]="vm.details.category" [format]="'int?'" [tag]="'span'" ></bind-custom></dd>
+ 
+
+    <dt>{{ vm.infos.ativo.label }}:</dt>
+    <dd><bind-custom [model]="vm.details.ativo" [format]="'bool?'" [tag]="'span'" ></bind-custom></dd>
+ 
+
+</dl> 

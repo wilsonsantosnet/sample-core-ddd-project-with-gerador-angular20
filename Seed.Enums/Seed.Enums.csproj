@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <AssemblyName>Seed.Enums</AssemblyName>
+    <PackageId>Seed.Enums</PackageId>
+  </PropertyGroup>
+
+</Project>

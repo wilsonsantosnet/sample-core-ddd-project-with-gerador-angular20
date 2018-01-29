@@ -1,0 +1,14 @@
+<div class="row">
+  <section class="col-md-6">
+	<div class='form-group'>
+      <label>{{ vm.infos.name.label }}</label>
+      <input type='text' class='form-control'  [(ngModel)]='vm.modelFilter.name' name='name' />
+    </div>
+  </section>
+  <section class="col-md-6">
+	<div class='form-group'>
+      <label>{{ vm.infos.sampleTypeId.label }}</label>
+      <input type='text' class='form-control'  [(ngModel)]='vm.modelFilter.sampleTypeId' name='sampleTypeId' />
+    </div>
+  </section>
+</div>

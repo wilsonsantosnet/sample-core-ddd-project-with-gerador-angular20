@@ -1,0 +1,46 @@
+<div class="row">
+  <section class="col-md-6">
+	<div class='form-group'>
+      <label>{{ vm.infos.name.label }}</label>
+      <input type='text' class='form-control'  [(ngModel)]='vm.modelFilter.name' name='name' />
+    </div>
+  </section>
+  <section class="col-md-6">
+	<div class='form-group'>
+      <label>{{ vm.infos.datetime.label }}</label>
+      <input type='text' class='form-control'  [(ngModel)]='vm.modelFilter.datetime' name='datetime'datepicker />
+    </div>
+  </section>
+  <section class="col-md-6">
+	<div class='form-group'>
+      <label>{{ vm.infos.sampleId.label }}</label>
+      <input type='text' class='form-control'  [(ngModel)]='vm.modelFilter.sampleId' name='sampleId' />
+    </div>
+  </section>
+  <section class="col-md-6">
+	<div class='form-group'>
+      <label>{{ vm.infos.sampleTypeId.label }}</label>
+      <select class='form-control'  name='sampleTypeId' [(ngModel)]='vm.modelFilter.sampleTypeId' datasource [dataitem]="'SampleType'" [fieldFilterName]="'Name'"></select>
+    </div>
+  </section>
+  <section class="col-md-6">
+	<div class='form-group'>
+      <label>{{ vm.infos.age.label }}</label>
+      <input type='text' class='form-control'  [(ngModel)]='vm.modelFilter.age' name='age' />
+    </div>
+  </section>
+  <section class="col-md-6">
+	<div class='form-group'>
+      <label>{{ vm.infos.category.label }}</label>
+      <input type='text' class='form-control'  [(ngModel)]='vm.modelFilter.category' name='category' />
+    </div>
+  </section>
+  <section class="col-md-6">
+	<label>{{ vm.infos.ativo.label }}</label>
+<div class='form-group'>
+    <label class='radio-inline'><input type='radio' name='ativo' [(ngModel)]='vm.modelFilter.ativo'> Todos</label>
+    <label class='radio-inline'><input type='radio' name='ativo' [(ngModel)]='vm.modelFilter.ativo' value='true'> Sim</label>
+    <label class='radio-inline'><input type='radio' name='ativo' [(ngModel)]='vm.modelFilter.ativo' value='false'> Não</label>
+</div>
+  </section>
+</div>
