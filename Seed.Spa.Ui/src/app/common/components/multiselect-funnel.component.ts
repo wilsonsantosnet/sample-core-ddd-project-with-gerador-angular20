@@ -9,7 +9,7 @@ import { ViewModel } from '../model/viewmodel';
     template: `<div class="row">
 
       <section class="col-md-5">
-        <input type="text" [(ngModel)]='_filterFunnel' class="form-control" name="filter_funnel" style="margin-bottom:20px" (keyup)="onFilterFunnel($event)">
+        <input type="text" [(ngModel)]='_filterFunnel' class="form-control" name="filter_funnel" style="margin-bottom:20px" (keyup)="onFilterLeft($event)">
       </section>
 
     </div>
@@ -21,13 +21,13 @@ import { ViewModel } from '../model/viewmodel';
 
         <div class='checkbox'>
           <label>
-              <input [(ngModel)]='_datasourceAll' type='checkbox' (change)='onSelectAllDataSource($event)' /> Todos
+              <input [(ngModel)]='_datasourceAllRigth' type='checkbox' (change)='onSelectAllDataSourceRigth($event)' /> Todos
           </label>
         </div>
 
         <hr>    
         <label>Disponiveis:</label>
-        <div class='checkbox'  *ngFor="let option of _datasource">
+        <div class='checkbox'  *ngFor="let option of _datasourceRigth">
           <label>
               <input type='checkbox' [(ngModel)]='option.checked' name='{{ctrlNameItem}}'  value='{{option.id}}' (change)='onChange($event)' /> {{ option.name }}
           </label>
@@ -43,14 +43,14 @@ import { ViewModel } from '../model/viewmodel';
 
         <div class='checkbox'>
           <label>
-              <input [(ngModel)]='_datasourceFunnelAll' type='checkbox' (change)='onSelectAllDataSourceFunnel($event)' /> Todos
+              <input [(ngModel)]='_datasourceAllLeft' type='checkbox' (change)='onSelectAllDataSourceLeft($event)' /> Todos
           </label>
         </div>
 
         <hr>    
 
         <label>Selecionados:</label>
-        <div class='checkbox' *ngFor="let option_funnel of _datasource_funnel">
+        <div class='checkbox' *ngFor="let option_funnel of _datasourceLeft">
           <label>
               <input type='checkbox' [(ngModel)]='option_funnel.checked' name='{{ctrlNameItem}}'  value='{{option_funnel.id}}'  /> {{ option_funnel.name }}
           </label>
@@ -71,10 +71,11 @@ export class MultiSelectFunnelComponent implements OnInit, OnDestroy {
     @Input() disabledOnInit: boolean;
     @Input() fieldFilterName: any;
 
-    _datasource: any[];
-    _datasourceAll: boolean;
-    _datasourceFunnelAll: boolean;
-    _datasource_funnel: any[];
+    _datasourceRigth: any[];
+    _datasourceAllRigth: boolean;
+    _datasourceAllLeft: boolean;
+    _datasourceLeft: any[];
+
     _selectedTemp: any[];
     _modelOutput: any[];
     _collectionjsonTemplate: any;
@@ -96,7 +97,7 @@ export class MultiSelectFunnelComponent implements OnInit, OnDestroy {
 
         if (!this.disabledOnInit) {
             this.init();
-            this._getInstance();
+            this.getInstance();
         }
 
         this._notificationEmitter = GlobalService.getNotificationEmitter().subscribe((not: any) => {
@@ -104,12 +105,10 @@ export class MultiSelectFunnelComponent implements OnInit, OnDestroy {
             if (not.event == "edit" || not.event == "create" || not.event == "init") {
                 this.init();
             }
-
             if (not.event == "change") {
                 if (not.data.dataitem == this.dataitem)
-                    this._getInstance(not.data.parentFilter);
+                    this.getInstance(not.data.parentFilter);
             }
-            console.log("not", not);
         })
 
 
@@ -118,100 +117,93 @@ export class MultiSelectFunnelComponent implements OnInit, OnDestroy {
     init() {
         this._selectedTemp = [];
         this._modelOutput = [];
-        this._datasource = [];
-        this._datasource_funnel = [];
+        this._datasourceRigth = [];
+        this._datasourceLeft = [];
         this._modelInput = this.vm.model[this.ctrlName];
         this._collectionjsonTemplate = "";
     }
 
-    onSelectAllDataSource(e: any) {
-        for (var i in this._datasource) {
-            this._datasource[i].checked = this._datasourceAll;
+    onSelectAllDataSourceRigth(e: any) {
+        for (var i in this._datasourceRigth) {
+            this._datasourceRigth[i].checked = this._datasourceAllRigth;
         }
     }
-
-    onSelectAllDataSourceFunnel(e: any) {
-        for (var i in this._datasource_funnel) {
-            this._datasource_funnel[i].checked = this._datasourceFunnelAll;
+    onSelectAllDataSourceLeft(e: any) {
+        for (var i in this._datasourceLeft) {
+            this._datasourceLeft[i].checked = this._datasourceAllLeft;
         }
     }
-
-    onFilterFunnel(e: any) {
+    onFilterLeft(e: any) {
 
         if (this._filteronstop)
             clearTimeout(this._filteronstop)
 
         this._filteronstop = setTimeout(() => {
-            this._datasource = [];
+            this._datasourceRigth = [];
             var filterFunnel: any = {};
             filterFunnel[this.fieldFilterName] = this._filterFunnel;
-            this._getInstance(filterFunnel)
+            this.getInstance(filterFunnel)
         }, 500)
     }
-
     onChange(e: any) {
 
     }
-
     onTransferenciaToRight() {
 
-        var removeables = [];
-        for (var i in this._datasource) {
+        for (var i in this._datasourceRigth) {
 
-            if (this._datasource[i].checked) {
-                this._datasource[i].checked = false;
-                this._datasource_funnel.push(this._datasource[i]);
-                removeables.push(this._datasource[i].id);
+            if (this._datasourceRigth[i].checked) {
+                this._datasourceRigth[i].checked = false;
+                this._datasourceLeft.push(this._datasourceRigth[i]);
             }
         }
 
-        removeables.forEach(itemRemoveable => {
-            this._datasource = this._datasource.filter((item: any) => {
-                return item.id != itemRemoveable;
-            });
-        });
-
+        this.removeableLeft()
         this.updateModelOutputFunnel();
         this._selectedTemp = [];
 
     }
-
     onTransferenciaToLeft() {
 
-        var removeables = [];
-        for (let i in this._datasource_funnel) {
-            if (this._datasource_funnel[i].checked) {
-                this._datasource_funnel[i].checked = false;
-                this._datasource.push(this._datasource_funnel[i]);
-                removeables.push(this._datasource_funnel[i].id);
+        for (let i in this._datasourceLeft) {
+            if (this._datasourceLeft[i].checked) {
+                this._datasourceLeft[i].checked = false;
+                this._datasourceRigth.push(this._datasourceLeft[i]);
             }
         }
 
-        removeables.forEach(itemRemoveable => {
-            this._datasource_funnel = this._datasource_funnel.filter((item: any) => {
-                return item.id != itemRemoveable;
-            });
-        });
-
+        this.removeableRigth();
         this.updateModelOutputFunnel();
         this._selectedTemp = [];
 
     }
 
+    removeableLeft() {
+        this._datasourceLeft.forEach(itemLeft => {
+            this._datasourceRigth = this._datasourceRigth.filter((item: any) => {
+                return item.id != itemLeft.id;
+            });
+        });
+    }
+    removeableRigth() {
+        this._datasourceRigth.forEach(itemRigth => {
+            this._datasourceLeft = this._datasourceLeft.filter((item: any) => {
+                return item.id != itemRigth.id;
+            });
+        });
+    }
     updateModelOutputFunnel() {
 
         this._modelOutput = [];
-        this._datasource_funnel.forEach((item) => {
+        this._datasourceLeft.forEach((item) => {
             this._modelOutput.push(item.id);
         })
         this.serializer();
     }
-
-    private serializer() {
+    serializer() {
         this.vm.model[this.ctrlName] = this.serializeToSave();
     }
-
-    private serializeToSave() {
+    serializeToSave() {
 
         let items: any = [];
 
@@ -223,21 +215,15 @@ export class MultiSelectFunnelComponent implements OnInit, OnDestroy {
 
         return JSON.parse(this._collectionjsonTemplate);
     }
-
-
-
-    private _getInstance(parentFilter?: any) {
+    getInstance(parentFilter?: any) {
         let filters = Object.assign(this.datafilters || {}, parentFilter || {});
         this.getInstanceMultiSelect(filters);
     }
-
-    private getInstanceMultiSelect(filters: any) {
-
-
+    getInstanceMultiSelect(filters: any) {
         this.api.setResource(this.dataitem, this.endpoint).getDataitem(filters).subscribe(result => {
-            this._datasource = [];
+            this._datasourceRigth = [];
             for (let item in result.dataList) {
-                this._datasource.push({
+                this._datasourceRigth.push({
                     id: result.dataList[item].id,
                     name: result.dataList[item].name,
                     checked: this._modelInput ? this._modelInput.filter((selecteds: any) => {
@@ -245,8 +231,9 @@ export class MultiSelectFunnelComponent implements OnInit, OnDestroy {
                     }).length > 0 : false
                 });
             }
-
+            this.removeableLeft();
             this.onTransferenciaToRight();
+            this._modelInput = null;
         });
 
     }
